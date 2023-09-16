@@ -29,7 +29,13 @@ operators.forEach(button => {
 });
 
 const equals = document.querySelector("#equals");
-equals.addEventListener("click", () => operate(+firstNumber, +secondNumber, operator));
+equals.addEventListener("click", () => {
+    if(!secondNumber && operator){
+        alert("Invalid format!");
+    }else{
+        operate(+firstNumber, +secondNumber, operator);
+    }
+});
 
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => {firstNumber = ""; secondNumber = ""; operator = ""; updateDisplay()});
