@@ -51,7 +51,7 @@ function operate(x, y, operator){
             if(y === 0){
                 alert("Impossible to divide by 0!");
             }else{
-                display.textContent = x / y;
+                display.textContent = Math.round((x / y) * 10**10) / 10**10;
                 firstNumber = display.textContent;
                 secondNumber = "";
             }
