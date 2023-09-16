@@ -32,6 +32,23 @@ operators.forEach(button => {
     });    
 });
 
+const decimal = document.querySelector("#decimal");
+decimal.addEventListener("click", () => {
+    if(!firstNumber){
+        firstNumber = "0.";
+        updateDisplay();
+    }else if(!operator && !firstNumber.includes(".")){
+        firstNumber += ".";
+        updateDisplay();
+    }else if(!secondNumber && operator){
+        secondNumber = "0.";
+        updateDisplay();
+    }else if(!secondNumber.includes(".") && operator){
+        secondNumber += ".";
+        updateDisplay();
+    }
+});
+
 const equals = document.querySelector("#equals");
 equals.addEventListener("click", () => {
     if(!secondNumber && operator){
@@ -48,31 +65,29 @@ function operate(x, y, operation){
     switch(operation){
         case "+":
             display.textContent = x + y;
-            firstNumber = display.textContent;
-            secondNumber = "";
-            operator = "";
+            prepareNextOperation();
             break;
         case "-":
             display.textContent = x - y;
-            firstNumber = display.textContent;
-            secondNumber = "";
-            operator = "";
+            prepareNextOperation();
             break;
         case "*":
             display.textContent = x * y;
-            firstNumber = display.textContent;
-            secondNumber = "";
-            operator = "";
+            prepareNextOperation();
             break;
         case "/":
             if(y === 0){
                 alert("Impossible to divide by 0!");
             }else{
                 display.textContent = Math.round((x / y) * 10**10) / 10**10;
-                firstNumber = display.textContent;
-                secondNumber = "";
-                operator = "";
+                prepareNextOperation();
             }
             break;
     }
+}
+
+function prepareNextOperation(){
+    firstNumber = display.textContent;
+    secondNumber = "";
+    operator = "";
 }
