@@ -4,6 +4,10 @@ let operator = "";
 
 let display = document.querySelector("#display");
 
+function updateDisplay(){
+    display.textContent = firstNumber + operator + secondNumber;
+}
+
 const numbers = document.querySelectorAll(".num");
 numbers.forEach(button => {
     button.addEventListener("click", () => {
@@ -31,18 +35,22 @@ function operate(x, y, operator){
         case "+":
             display.textContent = x + y;
             firstNumber = display.textContent;
+            secondNumber = "";
             break;
         case "-":
             display.textContent = x - y;
             firstNumber = display.textContent;
+            secondNumber = "";
             break;
         case "*":
             display.textContent = x * y;
             firstNumber = display.textContent;
+            secondNumber = "";
             break;
         case "/":
             display.textContent = x / y;
             firstNumber = display.textContent;
+            secondNumber = "";
             break;
         default:
             alert("Invalid format!");
