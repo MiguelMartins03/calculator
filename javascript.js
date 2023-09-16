@@ -48,9 +48,13 @@ function operate(x, y, operator){
             secondNumber = "";
             break;
         case "/":
-            display.textContent = x / y;
-            firstNumber = display.textContent;
-            secondNumber = "";
+            if(y === 0){
+                alert("Impossible to divide by 0!");
+            }else{
+                display.textContent = x / y;
+                firstNumber = display.textContent;
+                secondNumber = "";
+            }
             break;
         default:
             alert("Invalid format!");
