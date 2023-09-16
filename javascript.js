@@ -19,11 +19,15 @@ numbers.forEach(button => {
 const operators = document.querySelectorAll(".operator");
 operators.forEach(button => {
     button.addEventListener("click", () => {
-        if(firstNumber){
+        if(!firstNumber){
+            alert("Invalid format!");
+        }else if(!secondNumber){
             operator = button.textContent;
             updateDisplay();
         }else{
-            alert("Invalid format!");
+            operate(+firstNumber, +secondNumber, operator);
+            operator = button.textContent;
+            updateDisplay();
         }
     });    
 });
