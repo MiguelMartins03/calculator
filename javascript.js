@@ -19,8 +19,12 @@ numbers.forEach(button => {
 const operators = document.querySelectorAll(".operator");
 operators.forEach(button => {
     button.addEventListener("click", () => {
-        operator = button.textContent;
-        updateDisplay();
+        if(firstNumber){
+            operator = button.textContent;
+            updateDisplay();
+        }else{
+            alert("Invalid format!");
+        }
     });    
 });
 
@@ -30,22 +34,25 @@ equals.addEventListener("click", () => operate(+firstNumber, +secondNumber, oper
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => {firstNumber = ""; secondNumber = ""; operator = ""; updateDisplay()});
 
-function operate(x, y, operator){
-    switch(operator){
+function operate(x, y, operation){
+    switch(operation){
         case "+":
             display.textContent = x + y;
             firstNumber = display.textContent;
             secondNumber = "";
+            operator = "";
             break;
         case "-":
             display.textContent = x - y;
             firstNumber = display.textContent;
             secondNumber = "";
+            operator = "";
             break;
         case "*":
             display.textContent = x * y;
             firstNumber = display.textContent;
             secondNumber = "";
+            operator = "";
             break;
         case "/":
             if(y === 0){
@@ -54,9 +61,8 @@ function operate(x, y, operator){
                 display.textContent = Math.round((x / y) * 10**10) / 10**10;
                 firstNumber = display.textContent;
                 secondNumber = "";
+                operator = "";
             }
             break;
-        default:
-            alert("Invalid format!");
     }
 }
