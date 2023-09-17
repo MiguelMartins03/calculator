@@ -1,0 +1,78 @@
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    background-color: rgb(245, 225, 252);
+}
+
+#calculator{
+    display: flex;
+    flex-direction: column;
+    border: 5px solid indigo;
+    padding: 15px;
+    background-color: rgb(40, 40, 40);
+}
+
+#display{
+    box-sizing: content-box;
+    max-width: 100%;
+    overflow: hidden;
+    font-size: 60px;
+    color: rgb(245, 225, 252);
+    text-align: right;
+    height: 1em;
+    border-bottom: 2px solid rgb(65, 65, 65);
+    padding: 25px 0 40px;
+    margin-bottom: 15px;
+}
+
+#numpad{
+    display: flex;
+    flex-direction: column;
+}
+
+.row{
+    display: flex;
+}
+
+button{
+    border: 0;
+    margin: 2.5px;
+    height: 71px;
+    width: 71px;
+    font-size: 25px;
+    color: rgb(245, 225, 252);
+    background-color: rgb(65, 65, 65);
+    border-radius: 7px;
+}
+
+#zero{
+    flex: auto;
+}
+
+#backspace{
+    font-size: 20px;
+}
+
+#clear{
+    color: red;
+}
+
+#percentage{
+    font-size: 30px;
+}
+
+.operator{
+    font-size: 33px;
+}
+
+.operator, #percentage, #backspace{
+    color: indigo;
+}
+
+#equals{
+    background-color: indigo;
+}

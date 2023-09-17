@@ -6,70 +6,81 @@ let display = document.querySelector("#display");
 
 function updateDisplay(){
     display.textContent = firstNumber + operator + secondNumber;
+    if(display.textContent.length > 9) {
+        display.textContent = display.textContent.substring(0, 9);
+    }
 }
 
 const numbers = document.querySelectorAll(".num");
 numbers.forEach(button => {
     button.addEventListener("click", () => {
-        if(operator){
-            if(secondNumber.includes("%")){
-                operate(+firstNumber, +secondNumber, operator);
-                operator = "*";
-                secondNumber += button.textContent;
+        if(display.textContent.length < 9){
+            if(operator){
+                if(secondNumber.includes("%")){
+                    operate(+firstNumber, +secondNumber, operator);
+                    operator = "*";
+                    secondNumber += button.textContent;
+                }else{
+                    secondNumber += button.textContent;
+                }
             }else{
-                secondNumber += button.textContent;
+                if(firstNumber.includes("%")){
+                    operate(+firstNumber, +secondNumber, operator);
+                    operator = "*";
+                    firstNumber += button.textContent;
+                }else{
+                    firstNumber += button.textContent;
+                }
             }
-        }else{
-            if(firstNumber.includes("%")){
-                operate(+firstNumber, +secondNumber, operator);
-                operator = "*";
-                firstNumber += button.textContent;
-            }else{
-                firstNumber += button.textContent;
-            }
+            updateDisplay();
         }
-        updateDisplay();
-    });    
+    });
 });
 
 const operators = document.querySelectorAll(".operator");
 operators.forEach(button => {
     button.addEventListener("click", () => {
-        if(!firstNumber){
-            alert("Invalid format!");
-        }else if(!secondNumber){
-            operator = button.textContent;
-            updateDisplay();
-        }else{
-            operate(+firstNumber, +secondNumber, operator);
-            operator = button.textContent;
-            updateDisplay();
+        if(display.textContent.length < 9){
+            if(!firstNumber){
+                alert("Invalid format!");
+            }else if(!secondNumber){
+                operator = button.textContent;
+                updateDisplay();
+            }else{
+                operate(firstNumber, secondNumber, operator);
+                operator = button.textContent;
+                updateDisplay();
+            }
         }
-    });    
+    });
 });
 
 const decimal = document.querySelector("#decimal");
 decimal.addEventListener("click", () => {
-    if(!firstNumber){
-        firstNumber = "0.";
-    }else if(!operator && !firstNumber.includes(".")){
-        firstNumber += ".";
-    }else if(!secondNumber && operator){
-        secondNumber = "0.";
-    }else if(!secondNumber.includes(".") && operator){
-        secondNumber += ".";
+    if(display.textContent.length < 9){
+        if(!firstNumber){
+            firstNumber = "0.";
+        }else if(!operator && !firstNumber.includes(".")){
+            firstNumber += ".";
+        }else if(!secondNumber && operator){
+            secondNumber = "0.";
+        }else if(!secondNumber.includes(".") && operator){
+            secondNumber += ".";
+        }
+        updateDisplay();
     }
-    updateDisplay();
 });
 
 const percentage = document.querySelector("#percentage");
 percentage.addEventListener("click", () => {
-    if(!operator){
-        firstNumber += "%";
-    }else if(operator && secondNumber){
-        secondNumber += "%";
+    if(display.textContent.length < 9){
+        if(!operator){
+            firstNumber += "%";
+        }else if(operator && secondNumber){
+            secondNumber += "%";
+        }
+        updateDisplay();
     }
-    updateDisplay();
 });
 
 const equals = document.querySelector("#equals");
@@ -130,7 +141,10 @@ function operate(x, y, operation){
 }
 
 function prepareNextOperation(result){
-    display.textContent = Math.round((result) * 10**10) / 10**10;
+    display.textContent = Math.round((result) * 10**7) / 10**7;
+    if(display.textContent.length > 9) {
+        display.textContent = display.textContent.substring(0, 9);
+    }
     firstNumber = display.textContent;
     secondNumber = "";
     operator = "";
