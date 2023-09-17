@@ -86,11 +86,24 @@ equals.addEventListener("click", () => {
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => {firstNumber = ""; secondNumber = ""; operator = ""; updateDisplay()});
 
+const backspace = document.querySelector("#backspace");
+backspace.addEventListener("click", () => {
+    if(firstNumber && !operator && !secondNumber){
+        firstNumber = firstNumber.slice(0,-1);
+    }else if(operator && !secondNumber){
+        operator = "";
+    }else if(secondNumber){
+        secondNumber = secondNumber.slice(0,-1);
+    }
+    updateDisplay();
+});
+
 function operate(x, y, operation){
     if(x.includes("%")){
         x = +(x.slice(0,-1));
         x /= 100;
-    }else if(y.includes("%")){
+    }
+    if(y.includes("%")){
         y = +(y.slice(0,-1));
         y /= 100;
     }
@@ -98,29 +111,26 @@ function operate(x, y, operation){
     y = +y;
     switch(operation){
         case "+":
-            display.textContent = x + y;
-            prepareNextOperation();
+            prepareNextOperation(x + y);
             break;
         case "-":
-            display.textContent = x - y;
-            prepareNextOperation();
+            prepareNextOperation(x - y);
             break;
         case "*":
-            display.textContent = x * y;
-            prepareNextOperation();
+            prepareNextOperation(x * y);
             break;
         case "/":
             if(y === 0){
                 alert("Impossible to divide by 0!");
             }else{
-                display.textContent = Math.round((x / y) * 10**10) / 10**10;
-                prepareNextOperation();
+                prepareNextOperation(x / y);
             }
             break;
     }
 }
 
-function prepareNextOperation(){
+function prepareNextOperation(result){
+    display.textContent = Math.round((result) * 10**10) / 10**10;
     firstNumber = display.textContent;
     secondNumber = "";
     operator = "";
