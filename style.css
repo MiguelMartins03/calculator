@@ -49,6 +49,10 @@ button{
     border-radius: 7px;
 }
 
+button:active{
+    background-color: rgb(75, 75, 75);
+}
+
 #zero{
     flex: auto;
 }
@@ -75,4 +79,8 @@ button{
 
 #equals{
     background-color: indigo;
+}
+
+#equals:active{
+    background-color: rgb(86, 0, 148)
 }
