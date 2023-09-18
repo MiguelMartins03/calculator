@@ -2,6 +2,28 @@ let firstNumber = "";
 let secondNumber = "";
 let operator = "";
 
+window.addEventListener("keydown", (e) => {
+    console.log(e.code)
+    let key = "";
+    switch(true) {
+        case e.code.includes("Digit"):
+            key = document.querySelector(`#num${e.code.slice(-1)}`);
+            key.click();
+            break;
+        case e.code.includes("Numpad"):
+            if(e.code.slice(6).search(/[0-9]/) >= 0){
+                key = document.querySelector(`#num${e.code.slice(-1)}`);
+                key.click();
+            }else if(e.code.slice(6).includes("Enter")){
+                key = document.querySelector("#equals");
+                key.click();
+            }
+            break;
+        default:
+            return;
+    }
+});
+
 let display = document.querySelector("#display");
 
 function updateDisplay(){
