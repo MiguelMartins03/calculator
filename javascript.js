@@ -4,45 +4,48 @@ let operator = "";
 
 window.addEventListener("keydown", (e) => {
     console.log(e.code)
-    let key = "";
-    switch(true) {
-        case e.code.includes("Digit"):
-            key = document.querySelector(`#num${e.code.slice(-1)}`);
-            key.click();
-            break;
-        case e.code.includes("Numpad"):
-            if(e.code.slice(6).search(/[0-9]/) >= 0){
-                key = document.querySelector(`#num${e.code.slice(-1)}`);
-                key.click();
-            }else if(e.code.slice(6).includes("Enter")){
-                key = document.querySelector("#equals");
-                key.click();
-            }else{
-                switch(e.code.slice(6)) {
-                    case "Divide":
-                        key = document.querySelector("#divide");
-                        key.click();
-                        break;
-                    case "Multiply":
-                        key = document.querySelector("#multiply");
-                        key.click();
-                        break;
-                    case "Subtract":
-                        key = document.querySelector("#subtract");
-                        key.click();
-                        break;
-                    case "Add":
-                        key = document.querySelector("#add");
-                        key.click();
-                        break;
-                    case "Decimal":
-                        key = document.querySelector("#decimal");
-                        key.click();
-                        break;
-                }
-            }
-            break;
-    }
+    // let key = "";
+    // switch(true) {
+    //     case e.code.includes("Digit"):
+    //         key = document.querySelector(`#num${e.code.slice(-1)}`);
+    //         key.click();
+    //         break;
+    //     case e.code.includes("Numpad"):
+    //         if(e.code.slice(6).search(/[0-9]/) >= 0){
+    //             key = document.querySelector(`#num${e.code.slice(-1)}`);
+    //             key.click();
+    //         }else if(e.code.slice(6).includes("Enter")){
+    //             key = document.querySelector("#equals");
+    //             key.click();
+    //         }else{
+    //             switch(e.code.slice(6)) {
+    //                 case "Divide":
+    //                     key = document.querySelector("#divide");
+    //                     key.click();
+    //                     break;
+    //                 case "Multiply":
+    //                     key = document.querySelector("#multiply");
+    //                     key.click();
+    //                     break;
+    //                 case "Subtract":
+    //                     key = document.querySelector("#subtract");
+    //                     key.click();
+    //                     break;
+    //                 case "Add":
+    //                     key = document.querySelector("#add");
+    //                     key.click();
+    //                     break;
+    //                 case "Decimal":
+    //                     key = document.querySelector("#decimal");
+    //                     key.click();
+    //                     break;
+    //             }
+    //         }
+    //         break;
+    // }
+    key = document.querySelector(`button[data-key*="${e.code}"]`);
+    if(!key) return;
+    key.click();
 });
 
 let display = document.querySelector("#display");
